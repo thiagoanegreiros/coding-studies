@@ -17,6 +17,16 @@ const countAllPathsWithModK0 = (k, costs, from_lst, to_lst) => {
   const g = (n, s) => {
     let result = 0
     const curr = (s + costs[n]) % k
+
+    // console.info('--------')
+    // console.info({
+    //   s,
+    //   n,
+    //   curr,
+    //   cost: costs[n],
+    //   prefixes
+    // })
+
     if (!prefixes.has(curr)) {
       prefixes.set(curr, 0)
     }
