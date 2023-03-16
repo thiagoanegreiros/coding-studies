@@ -4,7 +4,7 @@ const isPalindrome = function(s) {
     const sLength = s.length
     let newS = ''
     for (let i = 0; i < sLength; i++) {
-        newS += s[i].toLowerCase().replace(new RegExp('[^a-z0-9]','gi'), '')
+        newS += s[i].toLowerCase().replace(/[^a-z0-9]/gi, '')
     }
 
     let leftIndex = 0
