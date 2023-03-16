@@ -7,10 +7,12 @@ const maxProfit = function(prices) {
         max
     ] = [0, 1, 0]
     while(rightIndex < prices.length) {
-        if (prices[rightIndex] <= prices[leftIndex]) {
+        const leftValue = prices[leftIndex]
+        const rightValue = prices[rightIndex]
+        if (leftValue > rightValue) {
             leftIndex = rightIndex
         }
-        max = Math.max(max, prices[rightIndex] - prices[leftIndex])
+        max = Math.max(max, rightValue - leftValue)
         rightIndex++
     }
     return max
