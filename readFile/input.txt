@@ -1,0 +1,13 @@
+host01 dado01 dado2
+host01 dado01 dado2
+host02 dado01 dado2
+host03 dado01 dado2
+host05 dado01 dado2
+host06 dado01 dado2
+host09 dado01 dado2
+host09 dado01 dado2
+host09 dado01 dado2
+host012 dado01 dado2
+host012 dado01 dado2
+host013 dado01 dado2
+host010 dado01 dado2

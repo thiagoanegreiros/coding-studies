@@ -11,35 +11,27 @@ const countAllPathsWithModK0 = (k, costs, from_lst, to_lst) => {
     children.get(u).push(to_lst[i])
   }
 
-  const prefixes = new Map();
-  prefixes.set(0, 1);
+  const prefixes = new Map()
+  prefixes.set(0, 1)
 
-  const g = (n, s) => {
+  const dfs = (n, s) => {
     let result = 0
     const curr = (s + costs[n]) % k
-
-    // console.info('--------')
-    // console.info({
-    //   s,
-    //   n,
-    //   curr,
-    //   cost: costs[n],
-    //   prefixes
-    // })
 
     if (!prefixes.has(curr)) {
       prefixes.set(curr, 0)
     }
-    result += prefixes.get(curr);
+    result += prefixes.get(curr)
     prefixes.set(curr, prefixes.get(curr) + 1)
     const childrenList = children.get(n) || []
     for (let i = 0; i < childrenList.length; i++) {
-      result += g(childrenList[i], curr)
+      const childrenValue = dfs(childrenList[i], curr)
+      result += childrenValue
     }
     prefixes.set(curr, prefixes.get(curr) - 1)
     return result
   }
-  return g(0, 0)
+  return dfs(0, 0)
 }
 
 assert.deepEqual(countAllPathsWithModK0(3, [2,1,2,2,4,2,5], [0,0,1,1,2,2], [1,2,3,4,5,6]), 4)

@@ -1,0 +1,9 @@
+host01 2
+host010 1
+host012 2
+host013 1
+host02 1
+host03 1
+host05 1
+host06 1
+host09 3
