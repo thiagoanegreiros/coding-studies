@@ -5,16 +5,16 @@ const path = require('path')
 const map = new Map()
 
 const readLines = (input, proccessEndLine) => {
-    let remaining = '';
+    let remaining = ''
   
     input.on('data', (data) => {
-      remaining += data;
-      let index = remaining.indexOf('\n');
+      remaining += data
+      let index = remaining.indexOf('\n')
       while (index > -1) {
-        let line = remaining.substring(0, index);
-        remaining = remaining.substring(index + 1);
-        proccessEndLine(line);
-        index = remaining.indexOf('\n');
+        let line = remaining.substring(0, index)
+        remaining = remaining.substring(index + 1)
+        proccessEndLine(line)
+        index = remaining.indexOf('\n')
       }
     });
   
