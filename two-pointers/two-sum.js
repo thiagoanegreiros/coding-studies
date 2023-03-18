@@ -1,8 +1,7 @@
 const assert = require('assert')
 
 const twoSum = function(numbers, target) {
-    let leftIndex = 0
-    let rightIndex = numbers.length - 1
+    let [leftIndex, rightIndex] = [0, numbers.length - 1]
     while(leftIndex < rightIndex) {
         if (numbers[leftIndex] + numbers[rightIndex] === target) {
             return [++leftIndex, ++rightIndex]
