@@ -4,7 +4,7 @@ const binarySearch = (items, target) => {
     let leftIndex = 0
     let rightIndex = items.length - 1
     while (leftIndex <= rightIndex) {
-        const middleIndex = Math.floor((rightIndex + leftIndex) / 2)
+        const middleIndex = (rightIndex + leftIndex) >> 0
         if (items[middleIndex] === target) {
             return middleIndex
         } else if (target > items[middleIndex]) {
