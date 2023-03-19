@@ -31,10 +31,13 @@ const countAllPathsWithModK0 = (k, costs, from_lst, to_lst) => {
     prefixes.set(curr, prefixes.get(curr) - 1)
     return result
   }
-  return dfs(0, 0)
+  return dfs(from_lst[0], 0)
 }
 
-assert.deepEqual(countAllPathsWithModK0(3, [2,1,2,2,4,2,5], [0,0,1,1,2,2], [1,2,3,4,5,6]), 4)
+// assert.deepEqual(countAllPathsWithModK0(3, [2,1,2,2,4,2,5], [0,0,1,1,2,2], [1,2,3,4,5,6]), 4)
+// assert.deepEqual(countAllPathsWithModK0(2, [1,2,2,1,2], [2,2,1,2], [3,1,4,5]), 6)
+assert.deepEqual(countAllPathsWithModK0(3, [2,3,0,3,0], [2,3,3,3], [3,1,4,5]), 7)
+
 // assert.deepEqual(countAllPathsWithModK0(2, [1,1,1,1], [0,0,3], [1,3,2]), 3)
 // assert.deepEqual(countAllPathsWithModK0(2, [1,2,2,1,2], [0,0,1,1], [1,3,2,4]), 6)
 

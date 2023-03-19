@@ -37,7 +37,7 @@ const writeFileEnd = () => {
     const data = hosts.reduce((fileContent, host) => {
         return `${fileContent}${host} ${map.get(host)}\n`
     }, "")
-    fs.writeFileSync(path.resolve(__dirname, 'output.txt'), data)
+    fs.writeFileSync(path.resolve(__dirname, 'output.txt'), data.substring(0, data.length - 1))
 }
 
 const input = fs.createReadStream(path.resolve(__dirname, 'input.txt'))
