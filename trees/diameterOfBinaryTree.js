@@ -14,15 +14,15 @@ const diameterOfTree = (root, max) => {
 }
 
 const dfs = (root, max) => {
-    const left = diameterOfTree(root.left, max);
-    const right = diameterOfTree(root.right, max);
+    const left = diameterOfTree(root.left, max)
+    const right = diameterOfTree(root.right, max)
 
-    const diameter = left + right;
-    max[0] = Math.max(max[0], diameter);
+    const diameter = left + right
+    max[0] = Math.max(max[0], diameter)
 
-    const height = Math.max(left, right);
+    const height = Math.max(left, right)
 
-    return height + 1;
+    return height + 1
 }
 
 assert.deepEqual(diameterOfBinaryTree(buildTreeLeekCode([1,2,3,4,5])), 3)
