@@ -1,10 +1,17 @@
 const assert = require('assert')
 
-const prefixes = new Map()
+let prefixes
 let paths = 0
+let from0 = 0
+let cost0 = 0
 
 const countAllPathsWithModK0 = function(k, costs, from_lst, to_lst) {
-    prefixes.set(from_lst[0], costs[0])
+    paths = 0
+    from0 = from_lst[0]
+    cost0 = costs[0]
+    prefixes = new Map()
+
+    prefixes.set(from0, cost0)
     const tree = new Map()
 
     for (let i = 0; i < from_lst.length; i++) {
@@ -39,10 +46,18 @@ const dfs = (treeNode, tree, k) => {
     
     let sum = 0
     for (let [_key, value] of prefixes) {
-      sum += value      
+      sum += value
     }
 
+    let sumWithNotop = 0
+    prefixes.delete(from0)
+    for (let [_key, value] of prefixes) {
+      sumWithNotop += value
+    }
+    prefixes.set(from0, cost0)
+
     if (sum % k === 0) paths++
+    if (sumWithNotop % k === 0) paths++
 
     prefixes.delete(node.node)
   }
@@ -52,7 +67,7 @@ assert.deepEqual(countAllPathsWithModK0(3, [2,1,2,2,4,2,5], [0,0,1,1,2,2], [1,2,
 // assert.deepEqual(countAllPathsWithModK0(2, [1,2,2,1,2], [2,2,1,2], [3,1,4,5]), 6)
 // assert.deepEqual(countAllPathsWithModK0(3, [2,3,0,3,0], [2,3,3,3], [3,1,4,5]), 7)
 
-// assert.deepEqual(countAllPathsWithModK0(2, [1,1,1,1], [0,0,3], [1,3,2]), 3)
+assert.deepEqual(countAllPathsWithModK0(2, [1,1,1,1], [0,0,3], [1,3,2]), 3)
 // assert.deepEqual(countAllPathsWithModK0(2, [1,2,2,1,2], [0,0,1,1], [1,3,2,4]), 6)
 
 console.info('Success')
