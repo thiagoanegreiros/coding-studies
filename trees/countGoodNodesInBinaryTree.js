@@ -1,38 +1,51 @@
 const assert = require('assert')
 
 const prefixes = new Map()
+let paths = 0
 
 const countAllPathsWithModK0 = function(k, costs, from_lst, to_lst) {
-    const children = new Map();
     prefixes.set(from_lst[0], costs[0])
+    const tree = new Map()
+
     for (let i = 0; i < from_lst.length; i++) {
       const u = from_lst[i]
-      if (!children.has(u)) {
-        children.set(u, [])
+      if (!tree.has(u)) {
+        tree.set(u, [])
       }
-      children.get(u).push({
+      tree.get(u).push({
         cost: costs[i+1],
         node: to_lst[i]
       })
     }
-    return count(children, k)
+
+    count(from_lst[0], tree, k)
+
+    return paths
 }
 
-const count = (root, k) => {
-    const isBaseCase = root === null
+const count = (treeNodeNumber, tree, k) => {
+    const treeNode = tree.get(treeNodeNumber)
+    const isBaseCase = treeNode === null || treeNode === undefined
     if (isBaseCase) return 0;
 
-    return dfs(root, k)
+    return dfs(treeNode, tree, k)
 }
 
-const dfs = (root, k) => {
-    const isGood = max <= root.val
-    if (isGood) total[0]++;
+const dfs = (treeNode, tree, k) => {
+  for (let i = 0; i < treeNode.length; i++) {
+    const node = treeNode[i]
+    prefixes.set(node.node, node.cost)
+    count(node.node, tree, k)
+    
+    let sum = 0
+    for (let [_key, value] of prefixes) {
+      sum += value      
+    }
 
-    max = Math.max(max, root.val);
+    if (sum % k === 0) paths++
 
-    count(root.left, max, total);
-    count(root.right, max, total);
+    prefixes.delete(node.node)
+  }
 }
 
 assert.deepEqual(countAllPathsWithModK0(3, [2,1,2,2,4,2,5], [0,0,1,1,2,2], [1,2,3,4,5,6]), 4)
