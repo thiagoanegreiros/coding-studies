@@ -3,10 +3,6 @@ const { buildTreeLeekCode } = require('./helper')
 
 const maxDepthBinaryTree = (root) => {
     if (root === null || root.length == 0) return 0
-    return dfs(root)
-}
-
-const dfs = (root) => {
     const left = maxDepthBinaryTree(root.left)
     const right = maxDepthBinaryTree(root.right)
 
