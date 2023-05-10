@@ -3,10 +3,7 @@ const { buildTreeLeekCode } = require('./helper')
 
 const invertBinaryTree = (root) => {
     if (root === null || root.length == 0) return root;
-    return dfs(root);
-}
 
-const dfs = (root) => {
     const left = invertBinaryTree(root.left);
     const right = invertBinaryTree(root.right);
 
