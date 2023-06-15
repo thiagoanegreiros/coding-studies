@@ -9,6 +9,16 @@
       "console": "integratedTerminal",
       "sourceMaps": true,
       "internalConsoleOptions": "neverOpen"
-    }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug current TS file",
+      "runtimeExecutable": "nodemon",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "sourceMaps": true,
+      "internalConsoleOptions": "neverOpen"
+    },
   ]
 }
