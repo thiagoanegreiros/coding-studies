@@ -12,8 +12,10 @@ const library: Book[] = [
 const allAuthors = library.flatMap((book) => book.authors)
 
 // Remove duplicates with Set
-console.log(...new Set(allAuthors));
+const authors: string[] = [...new Set(allAuthors)]
 
+// Ordering by name
+console.log(authors.sort((a, b) => b.localeCompare(a)))
 
 // SHIFT and UNSHIFT
 
