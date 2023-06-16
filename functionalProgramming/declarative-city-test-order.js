@@ -20,3 +20,11 @@ console.log(cities.reduce((acc, curr) =>{
     if (curr.population > acc) return curr.population
     return acc
 }, 0))
+
+console.log(cities.map((i) => ({...i, population: i.population * 2})))
+
+console.log(cities.filter((i) => i.name !== 'New York'))
+
+let n = [[-9, 87], [72], 452, [32, -9]]
+let flatten = n.reduce((acc, v) => acc.concat(v), [])
+console.log(flatten)
