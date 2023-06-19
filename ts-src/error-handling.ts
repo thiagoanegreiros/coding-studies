@@ -17,6 +17,11 @@ type Pensamento = {
     modelo: string
 }
 
+type FinalResult = {
+    successItems: Pensamento[],
+    errorItems: { index: number, id: number, reason: string }[]
+}
+
 const makeRequest = async () => {
     const result: AxiosResponse<Pensamento[]> = await axios.get<Pensamento[]>('http://localhost:3000/pensamentos?_limit=3')
 
@@ -31,14 +36,21 @@ const makeRequest = async () => {
         return axios.get<Pensamento>(`http://localhost:3000/pensamentos/${pensamento.id}`)
     })).then((results) => {
         console.info('results ==> ')
-        results.forEach((result) => {
+        console.info(results.reduce((acc: FinalResult, result: PromiseSettledResult<AxiosResponse<Pensamento, any>>, index: number): FinalResult => {
             if (result.status === 'rejected') {
                 console.error(`Result error ${result.reason}`)
+                acc.errorItems.push({
+                    index,
+                    id: pensamentos[index].id,
+                    reason: result.reason.message
+                })
             } else {
                 console.info(`success with id ${result.value.data.id}`)
+                acc.successItems.push(result.value.data)
                 console.info(result.value.data)
             }
-        })
+            return acc
+        }, { successItems: [], errorItems: []}))
     })
 }
 
