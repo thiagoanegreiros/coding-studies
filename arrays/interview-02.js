@@ -20,8 +20,19 @@ The result is 1 because the tallest candle is of height 6 and there's only 1.
 */
 
 const blowCandles = (candles) => {
+  return candles.reduce((acc, candle) => {
+    if (candle > acc.greater) {
+      return { count: 1, greater: candle }
+    } else if (candle === acc.greater) {
+      return { count: acc.count + 1, greater: candle }
+    }
+    return acc
+  }, { count: 0, greater: 0 }).count
+
+  /*
   let greater = 0
   let count = 0
+
   for(let i=0;i<candles.length;i++) {
     if (candles[i] > greater) {
       count = 1
@@ -31,7 +42,7 @@ const blowCandles = (candles) => {
     }
   }
 
-  return count
+  return count*/
 }
 
 assert.deepEqual(blowCandles([4, 4 ,1 ,3]), 2)
@@ -79,32 +90,28 @@ input: ["paris","applewatch","ipod","amsterdam","bigbook","orange","waterbottle"
 output: ["applewatch","bigbook","waterbottle"] 
 
 */
-
 const findCompoundWords = (input) => {
   const englishWords = ["water", "big", "apple", "watch", "banana", "york", "amsterdam", "orange", "macintosh", "bottle", "book"]
-  const output = []
 
-  for (let i=0;i<input.length;i++) {
-    const item = input[i]
-    let count = 0
-    for (let j=0;j<englishWords.length;j++) {
-      const eItem = englishWords[j]
-      if (item.indexOf(eItem) > -1) {
-        count++
+  return input.reduce((output, compoundWord) => {
+    const count = englishWords.reduce((sum, word) => {
+      if (compoundWord.indexOf(word) > -1) {
+        sum+= 1
       }
-      if (count > 1) {
-        output.push(item)
-        break
-      }
+      return sum
+    }, 0)
+
+    if (count > 1) {
+      output.push(compoundWord)
     }
-  }
 
-  return output
+    return output
+  }, [])
 }
 
 assert.deepEqual(
   findCompoundWords(
-    ["paris","applewatch","ipod","amsterdam","bigbook","orange","waterbottle"]
+    ["applewatch","ipod","amsterdam","bigbook","orange","waterbottle"]
   ),
   ["applewatch","bigbook","waterbottle"]
 )
