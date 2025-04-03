@@ -33,3 +33,31 @@ type NullablePerson = Partial<Person> | null;
 type PickPerson = Pick<Person, 'name'>;
 // Result: { name: string; }
 
+let l:any = { a: 1}
+let l2: unknown = { a: 1}
+
+console.info(l.a)
+
+type MEvent =
+  | { type: 'click'; x: number; y: number }
+  | { type: 'keypress'; key: string }
+  | { type: 'touch'; x: number; y: number }; // novo tipo
+
+function handleEvent(event: MEvent) {
+  switch (event.type) {
+    case 'click':
+      console.log(`Clique em ${event.x}, ${event.y}`);
+      break;
+      case 'keypress':
+        console.log(`Tecla: ${event.key}`);
+        break;
+    case 'touch':
+      console.log(`Tecla: ${event.x}`);
+      break;
+
+    default:
+      const _check: never = event; // 💥 Aqui o TypeScript reclama
+      console.info(_check)
+      break;
+  }
+}
